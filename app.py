@@ -14,7 +14,11 @@ regras = {
     "spock": ["tesoura", "pedra"]
 }
 
-def jogadores_osciosos():
+def jogadores_osciosos(): 
+
+    """
+    essa função serve para detectar jogadores que não estajam jogando na rodada
+    """
     osciosos = []
     for id, nome in jogadores.items():
         if id not in jogadas:
@@ -46,6 +50,20 @@ def cadastrar_jogador():
     # Persistência na memória
     jogadores[data["id"]] = data["nome"]
     return jsonify({"mensagem": f"Jogador {data['nome']} cadastrado com sucesso!"}), 201
+
+@app.route("/jogador/<int:id>", methods=["DELETE"])
+def remover_jogador():
+    """
+    Remove um jogador cadastrado pelo ID.
+    Também remove sua jogada, se já tiver jogado.
+    """
+    if id not in jogadores:
+        return jsonify({"erro": "Jogador não encontrado"}), 404
+
+    nome = jogadores.pop(id)  # Remove o jogador
+    jogadas.pop(id, None)     # Remove a jogada (se existir)
+
+    return jsonify({"mensagem": f"Jogador {nome} removido com sucesso!"})
 
 @app.route("/jogada", methods=["POST"])
 def fazer_jogada():
@@ -150,6 +168,7 @@ def finalizar_rodada():
     jogadas.clear()
 
     return jsonify({"vencedores": vencedores})
+
 
 
 if __name__ == "__main__":
