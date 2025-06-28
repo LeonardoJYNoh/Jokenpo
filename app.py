@@ -166,10 +166,17 @@ def finalizar_rodada():
             resultados[id] = vitorias_por_jogada[jogada]
 
     maior_vitoria = max(resultados.values())
-    vencedores = [jogadores[id] for id, v in resultados.items() if v == maior_vitoria]
+    vencedores = [jogadores[id] for id, v in resultados.items() if v == maior_vitoria] 
+    #Lista os nomes dos jogadores que tiveram a maior pontuação de vitórias nesta rodada.
 
+@app.route("/rodada/reset", methods=["POST"])
+def reset_rodada():
+    """
+    Limpa todas as jogadas e permite iniciar nova rodada
+    sem remover os jogadores cadastrados.
+    """
     jogadas.clear()
-    return jsonify({"vencedores": vencedores})
+    return jsonify({"mensagem": "Rodada reiniciada com sucesso!"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
