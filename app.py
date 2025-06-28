@@ -1,9 +1,10 @@
 from flask import Flask
+from flask_cors import CORS  
 from rotas import register_blueprints
 
 app = Flask(__name__)
+CORS(app)  
 
-# Registro dos blueprints definidos em rotas/__init__.py
 register_blueprints(app)
 
 if __name__ == "__main__":

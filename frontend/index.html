@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>JOKENPO - DEV</title>
+</head>
+<body>
+  <h1>JOKENPO</h1>
+
+  <section>
+    <h2>Regras do jogo</h2>
+    <ul>
+      <li><strong>Pedra</strong> ganha de Tesoura e Lagarto</li>
+      <li><strong>Papel</strong> ganha de Pedra e Spock</li>
+      <li><strong>Tesoura</strong> ganha de Papel e Lagarto</li>
+      <li><strong>Lagarto</strong> ganha de Spock e Papel</li>
+      <li><strong>Spock</strong> ganha de Tesoura e Pedra</li>
+    </ul>
+  </section>
+
+  <main>
+    <h2>Cadastro de Jogador</h2>
+    <input id="id" type="number" placeholder="ID do jogador" min="0" /> 
+    <input id="nome" placeholder="Nome do jogador" />
+    <button onclick="cadastrarJogador()">Cadastrar</button>
+
+    <h2>Remover Jogador</h2>
+    <input id="id-remover" type="number" placeholder="ID para remover" min="0" />
+    <button onclick="removerJogador()">Remover</button>
+
+    <h2>Fazer Jogada</h2>
+    <input id="id-jogada" type="number" placeholder="ID do jogador" min="0" />
+    <select id="jogada">
+      <option>pedra</option>
+      <option>papel</option>
+      <option>tesoura</option>
+      <option>lagarto</option>
+      <option>spock</option>
+    </select>
+    <button onclick="fazerJogada()">Jogar</button>
+
+    <h2>Rodada</h2>
+    <button onclick="consultarRodada()">Consultar rodada</button>
+    <button onclick="finalizarRodada()">Finalizar rodada</button>
+    <button onclick="resetarRodada()">Resetar rodada</button>
+
+    <h2>Resultado:</h2>
+    <pre id="resultado"></pre>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
