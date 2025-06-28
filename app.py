@@ -145,31 +145,31 @@ def finalizar_rodada():
             "jogadores_pendentes": osciosos
         }), 400
     
-    # Calcula o número de vitórias de cada jogador, quem tiver a maior quantidade de vitórias vence a rodada dentro de uma biblioteca
-    resultados = {}
-
-    #uso de loops duplos para comparar o "duelo" de dois jogadores até completar todas as duplas, possiveis
-    for id_1, jogada_1 in jogadas.items():
+    #Agrupa os IDs dos jogadores por tipo de jogada por um dicionario
+    grupo_por_jogada= {}
+    for id, jogada in jogadas.items():  
+        if jogada not in grupo_por_jogada:
+            grupo_por_jogada[jogada] = [] #cria uma chave jogada no dicionário com uma lista vazia
+        grupo_por_jogada[jogada].append(id) #registra o ID do jogador a determinada jogada feita
+    
+    #Determina a quantidade de vitorias de cada jogada.
+    vitorias_por_jogada = {} 
+    for jogada, vencem_de in regras.items():    
         vitorias = 0
-        for id_2, jogada_2 in jogadas.items():
-            if id_1 != id_2 and jogada_2 in regras[jogada_1]: #se os jogadores forem diferetes jogada do primeiro vence
-                vitorias += 1
-        resultados[id_1] = vitorias #registra a quantidade de vitorias
+        for vencida in vencem_de:   
+            vitorias += len(grupo_por_jogada.get(vencida, [])) #soma a quantidade de ganhos da jogada
+        vitorias_por_jogada[jogada] = vitorias  #demonstra quantas quantas vitorias tem cada jogada
 
-    maior_vitoria = max(resultados.values()) #vai determinar o maior numero de vitorias 
-    vencedores = [] 
+    resultados = {}
+    for jogada, ids in grupo_por_jogada.items():
+        for id in ids:
+            resultados[id] = vitorias_por_jogada[jogada]
 
-    #nesse loop, listamos os jogadores que ganharam essa rodada
-    for id, vitorias in resultados.items():
-        if vitorias == maior_vitoria:
-            vencedores.append(jogadores[id])
+    maior_vitoria = max(resultados.values())
+    vencedores = [jogadores[id] for id, v in resultados.items() if v == maior_vitoria]
 
-    # Limpa a rodada
     jogadas.clear()
-
     return jsonify({"vencedores": vencedores})
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
