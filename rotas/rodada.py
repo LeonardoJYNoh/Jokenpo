@@ -59,6 +59,11 @@ def finalizar_rodada():
             "jogadores_pendentes": osciosos
         }), 400
     
+    if len(jogadas) < 2:
+        return jsonify({
+            "erro": "Jogadores insuficientes para finalizar a rodada. Mínimo de 2 jogadores."
+        }), 400
+
 
     #Agrupa os IDs dos jogadores por tipo de jogada por um dicionario
     grupo_por_jogada= {}

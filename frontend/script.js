@@ -8,7 +8,7 @@ function mostrarResultado(dados) {
     resultadoElemento.style.color = "red";
     resultadoElemento.style.fontWeight = "bold";
   } 
-  else if (dados.vencedores) {
+  else if (dados.vencedores && dados.vencedores.length > 0) {
     const vencedoresStr = dados.vencedores.join(", ");
     resultadoElemento.innerText = `Vencedores: ${vencedoresStr}`;
     resultadoElemento.style.color = "green";
@@ -20,11 +20,18 @@ function mostrarResultado(dados) {
     resultadoElemento.style.fontWeight = "normal";
   }
   else if (dados.jogaram && dados.osciosos) {
-    const jogaramStr = dados.jogaram.map(nome => `${nome} já jogou`).join(", ");
-    const osciososStr = dados.osciosos.map(nome => `${nome} precisa jogar`).join(", ");
-    resultadoElemento.innerText = `${jogaramStr}${jogaramStr && osciososStr ? ", " : ""}${osciososStr}`;
-    resultadoElemento.style.color = "black";
-    resultadoElemento.style.fontWeight = "normal";
+    if (dados.jogaram.length === 0 && dados.osciosos.length === 0) {
+      resultadoElemento.innerText = "Todos já jogaram.";
+      resultadoElemento.style.color = "green";
+      resultadoElemento.style.fontWeight = "bold";
+    } else {
+      const jogaramStr = dados.jogaram.map(nome => `${nome} já jogou`).join(", ");
+      const osciososStr = dados.osciosos.map(nome => `${nome} precisa jogar`).join(", ");
+      const mensagem = [jogaramStr, osciososStr].filter(str => str).join(", ");
+      resultadoElemento.innerText = mensagem;
+      resultadoElemento.style.color = "black";
+      resultadoElemento.style.fontWeight = "normal";
+    }
   }
   else {
     resultadoElemento.innerText = JSON.stringify(dados, null, 2);
@@ -32,6 +39,7 @@ function mostrarResultado(dados) {
     resultadoElemento.style.fontWeight = "normal";
   }
 }
+
 function cadastrarJogador() {
   const jogadorId = parseInt(document.getElementById("id").value);
   const nomeJogador = document.getElementById("nome").value;

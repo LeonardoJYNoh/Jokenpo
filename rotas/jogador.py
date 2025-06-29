@@ -15,6 +15,8 @@ def cadastrar_jogador():
     
     if not data or ("id" not in data) or ("nome" not in data):
         return jsonify({"erro": "Dados inválidos"}), 400
+    if not data["nome"].strip():
+        return jsonify({"erro": "Nome do jogador não pode ser vazio"}), 400
     if data["id"] in jogadores:
         return jsonify({"erro": "Jogador já cadastrado"}), 400
     jogadores[data["id"]] = data["nome"]    
