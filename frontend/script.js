@@ -2,9 +2,17 @@ const apiBaseUrl = "http://localhost:5000";
 
 function mostrarResultado(dados) {
   const resultadoElemento = document.getElementById("resultado");
-  resultadoElemento.innerText = JSON.stringify(dados, null, 2);
-}
 
+  if (dados.erro) {
+    resultadoElemento.innerText = `ERRO: ${dados.erro.toUpperCase()}`;
+    resultadoElemento.style.color = "red";
+    resultadoElemento.style.fontWeight = "bold";
+  } else {
+    resultadoElemento.innerText = dados.mensagem || JSON.stringify(dados, null, 2);
+    resultadoElemento.style.color = "black";
+    resultadoElemento.style.fontWeight = "normal";
+  }
+}
 function cadastrarJogador() {
   const jogadorId = parseInt(document.getElementById("id").value);
   const nomeJogador = document.getElementById("nome").value;
