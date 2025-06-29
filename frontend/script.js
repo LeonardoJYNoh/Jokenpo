@@ -1,4 +1,3 @@
-// Configuração básica da API
 const apiBaseUrl = "http://localhost:5000"; 
 
 function mostrarResultado(dados) {

@@ -1,0 +1,17 @@
+* [33m952a7d1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mbackup-main[m[33m)[m feat: adiciona interface HTML com JS
+* [33mde2b18f[m feat: modularização do código
+* [33me8b10f1[m feat: adiciona endpoint de reset de rodada
+* [33m13a6163[m refactor: otimiza rota de finalização de rodada
+* [33m4dd939a[m feat: adiciona rota de deleção de usuário
+*   [33m950a739[m correção de versão
+[32m|[m[33m\[m  
+[32m|[m *   [33mbfa6ac2[m feat: adiciona rota de jogada
+[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m * [33md739db0[m feat: adiciona rota de jogada
+[32m|[m [34m|[m * [33mae3dfdf[m feat: adiciona rota de jogada
+* [34m|[m [35m|[m [33m0d4e8f0[m correção de versão
+[34m|[m[34m/[m [35m/[m  
+* [35m/[m [33m4ed9a38[m feat: adiciona rota de jogada
+[35m|[m[35m/[m  
+* [33mb4465a1[m feat: adiciona rota de cadastro de jogador
+* [33ma97fb5a[m criação do repositório
