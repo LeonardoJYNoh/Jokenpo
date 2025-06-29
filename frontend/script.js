@@ -7,8 +7,27 @@ function mostrarResultado(dados) {
     resultadoElemento.innerText = `ERRO: ${dados.erro.toUpperCase()}`;
     resultadoElemento.style.color = "red";
     resultadoElemento.style.fontWeight = "bold";
-  } else {
-    resultadoElemento.innerText = dados.mensagem || JSON.stringify(dados, null, 2);
+  } 
+  else if (dados.vencedores) {
+    const vencedoresStr = dados.vencedores.join(", ");
+    resultadoElemento.innerText = `Vencedores: ${vencedoresStr}`;
+    resultadoElemento.style.color = "green";
+    resultadoElemento.style.fontWeight = "bold";
+  }
+  else if (dados.mensagem) {
+    resultadoElemento.innerText = dados.mensagem;
+    resultadoElemento.style.color = "black";
+    resultadoElemento.style.fontWeight = "normal";
+  }
+  else if (dados.jogaram && dados.osciosos) {
+    const jogaramStr = dados.jogaram.map(nome => `${nome} já jogou`).join(", ");
+    const osciososStr = dados.osciosos.map(nome => `${nome} precisa jogar`).join(", ");
+    resultadoElemento.innerText = `${jogaramStr}${jogaramStr && osciososStr ? ", " : ""}${osciososStr}`;
+    resultadoElemento.style.color = "black";
+    resultadoElemento.style.fontWeight = "normal";
+  }
+  else {
+    resultadoElemento.innerText = JSON.stringify(dados, null, 2);
     resultadoElemento.style.color = "black";
     resultadoElemento.style.fontWeight = "normal";
   }
